@@ -1,52 +1,58 @@
-import { useMemo, useState } from 'react'
+import { useState } from 'react'
 import { mockScans } from './data/mockScans'
 
 type Screen = 'welcome' | 'image' | 'info'
 
-function App() {
+export default function App() {
   const [screen, setScreen] = useState<Screen>('welcome')
-
-  const selectValue = useMemo(() => {
-    if (screen === 'image') return 'Bilde'
-    return 'Informasjon'
-  }, [screen])
-
-  const handleSelectChange = (value: string) => {
-    if (value === 'Bilde') setScreen('image')
-    if (value === 'Informasjon') setScreen('info')
-  }
 
   return (
     <div className="windows-shell">
-      <img className="windows-topbar" src="/assets/windowstopbar.png" alt="Windows top bar" />
+      <img
+        className="windows-topbar"
+        src="/assets/windowstopbar.png"
+        alt="Windows topp"
+      />
 
       <div className="app-shell">
         {screen === 'welcome' ? (
-          <section className="welcome-screen">
+          <div className="welcome-screen">
             <div className="welcome-card">
               <h1>Demo av modellens implementasjon</h1>
               <p>Bachelorprosjekt Vår 2026</p>
               <button onClick={() => setScreen('image')}>Start</button>
             </div>
-          </section>
+          </div>
         ) : (
-          <main className="workspace">
-            <aside className="left-rail">
-              <div className="rail-icon active">AI</div>
-            </aside>
+          <div className="workspace">
+            {/* Left rail — AI-knapp nederst */}
+            <div className="left-rail">
+              <div className="rail-icon">AI</div>
+            </div>
 
-            <section className="content-area">
+            <div className="content-area">
+              {/* Tre viewer-kolonner */}
               <div className="viewer-grid">
                 {mockScans.map((scan) => (
-                  <article key={scan.id} className="viewer-card">
+                  <div key={scan.id} className="viewer-card">
                     <div className="viewer-toolbar">
-                      <span>{scan.date}</span>
-                      <span>{scan.time}</span>
-                      <span>{scan.modality}</span>
+                      <div className="viewer-toolbar-left">
+                        <span>{scan.date}</span>
+                        <span>{scan.time}</span>
+                        <span>{scan.modality}</span>
+                      </div>
+                      <div className="viewer-toolbar-right">
+                        <span className="tool-icon">◌</span>
+                        <span className="tool-icon">☆</span>
+                        <span className="tool-toggle">
+                          <span className="tool-dot" /> OD
+                        </span>
+                        <span className="tool-close">×</span>
+                      </div>
                     </div>
 
                     <div className="fundus-frame">
-                      <img src={scan.topImage} alt={`Retinavisning ${scan.date}`} />
+                      <img src={scan.topImage} alt={`Retina ${scan.date}`} />
                     </div>
 
                     <div className="oct-scale">
@@ -59,66 +65,66 @@ function App() {
                     </div>
 
                     <div className="oct-frame">
-                      <img src={scan.bottomImage} alt={`OCT-visning ${scan.date}`} />
+                      <img src={scan.bottomImage} alt={`OCT ${scan.date}`} />
                     </div>
-                  </article>
+                  </div>
                 ))}
               </div>
 
-              <section className="bottom-panel">
+              {/* Bunnpanel */}
+              <div className="bottom-panel">
                 <div className="bottom-panel-header">
-                  <select
-                    value={selectValue}
-                    onChange={(e) => handleSelectChange(e.target.value)}
-                    className="mode-select"
-                  >
-                    <option>Informasjon</option>
-                    <option>Bilde</option>
-                  </select>
+                  <div className="mode-select-wrap">
+                    <span className="mode-dot" />
+                    <select
+                      className="mode-select"
+                      value={screen === 'info' ? 'Informasjon' : 'Bilde'}
+                      onChange={(e) =>
+                        setScreen(e.target.value === 'Informasjon' ? 'info' : 'image')
+                      }
+                    >
+                      <option>Bilde</option>
+                      <option>Informasjon</option>
+                    </select>
+                  </div>
                 </div>
 
                 {screen === 'info' ? (
                   <div className="info-grid">
                     {mockScans.map((scan) => (
-                      <article key={scan.id} className="info-card">
-                        <h3>
-                          {scan.date} - {scan.time}
-                        </h3>
+                      <div key={scan.id} className="info-card">
+                        <h3>{scan.date} - {scan.time}</h3>
                         <ul>
-                          {scan.findings.map((item) => (
-                            <li key={item}>{item}</li>
+                          {scan.findings.map((item, i) => (
+                            <li key={i}>{item}</li>
                           ))}
                         </ul>
-                      </article>
+                      </div>
                     ))}
                   </div>
                 ) : (
                   <div className="result-grid">
                     {mockScans.map((scan) => (
-                      <article key={scan.id} className="result-card">
-                        <h3>
-                          {scan.date} - {scan.time}
-                        </h3>
+                      <div key={scan.id} className="result-card">
+                        <h3>{scan.date} - {scan.time}</h3>
                         <div className="result-image-frame">
-                          <img src={scan.resultImage} alt={`Resultatbilde ${scan.date}`} />
+                          <img src={scan.resultImage} alt={`Resultat ${scan.date}`} />
                         </div>
-                      </article>
+                      </div>
                     ))}
                   </div>
                 )}
-              </section>
-            </section>
-          </main>
+              </div>
+            </div>
+          </div>
         )}
       </div>
 
       <img
         className="windows-bottombar"
         src="/assets/windowsbottombar.png"
-        alt="Windows bottom bar"
+        alt="Windows bunn"
       />
     </div>
   )
 }
-
-export default App
