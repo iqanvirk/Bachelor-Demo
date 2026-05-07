@@ -1,0 +1,276 @@
+:root {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #f1f1f1;
+  background: #b8b8b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+  background: #000;
+}
+
+body {
+  min-height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.windows-shell {
+  height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.windows-topbar {
+  width: 100%;
+  height: 26px;
+  object-fit: fill;
+  flex-shrink: 0;
+  display: block;
+}
+
+.windows-bottombar {
+  width: 100%;
+  height: 50px;
+  object-fit: fill;
+  flex-shrink: 0;
+  display: block;
+}
+
+.app-shell {
+  height: calc(100vh - 26px - 50px);
+  background: #7b7b80;
+  overflow: hidden;
+}
+
+.welcome-screen {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #78787d;
+  padding: 32px;
+}
+
+.welcome-card {
+  width: min(560px, 100%);
+  background: #66666c;
+  border: 1px solid #4f4f53;
+  padding: 40px 32px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+}
+
+.welcome-card h1 {
+  margin: 0 0 10px;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.welcome-card p {
+  margin: 0 0 24px;
+  font-size: 18px;
+  color: #ececec;
+}
+
+.welcome-card button {
+  border: 1px solid #4a4a4a;
+  background: #ececec;
+  color: #111;
+  padding: 10px 26px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.workspace {
+  display: flex;
+  min-height: 100%;
+}
+
+.left-rail {
+  width: 28px;
+  background: #6a6a6d;
+  border-right: 1px solid #515151;
+  display: flex;
+  align-items: center;
+  padding-top: 515px;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.rail-icon {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  background: #1f5eff;
+  color: white;
+  font-size: 12px;
+  padding: 8px 3px;
+  border-radius: 2px;
+  letter-spacing: 1px;
+}
+
+.content-area {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #7c7c80;
+}
+
+.viewer-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3px;
+  background: #5f5f63;
+  padding: 3px;
+}
+
+.viewer-card {
+  background: #2e2e31;
+  border: 1px solid #696969;
+}
+
+.viewer-toolbar {
+  height: 24px;
+  background: #6d6d72;
+  color: #f1f1f1;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 0 8px;
+  font-size: 12px;
+}
+
+.fundus-frame,
+.oct-frame {
+  background: #000;
+}
+
+.fundus-frame {
+  aspect-ratio: 1.55 / 1;
+  border-bottom: 1px solid #4d4d4d;
+  overflow: hidden;
+}
+
+.fundus-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.oct-scale {
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6px;
+  font-size: 11px;
+  color: #fff;
+  background: #000;
+  border-top: 2px solid #f6b400;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+.oct-frame {
+  aspect-ratio: 1.8 / 0.78;
+  overflow: hidden;
+}
+
+.oct-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bottom-panel {
+  background: #78787d;
+  border-top: 1px solid #57575a;
+  min-height: 210px;
+  overflow: hidden;
+}
+
+.bottom-panel-header {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  background: #6b6b70;
+  border-bottom: 1px solid #59595c;
+}
+
+.mode-select {
+  background: #5f5f64;
+  color: #fff;
+  border: 1px solid #47474a;
+  font-size: 13px;
+  padding: 3px 8px;
+}
+
+.info-grid,
+.result-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: #5d5d61;
+}
+
+.info-card,
+.result-card {
+  background: #737378;
+  padding: 10px 14px 14px;
+  min-height: 180px;
+}
+
+.info-card h3,
+.result-card h3 {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.info-card ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.7;
+  font-size: 12px;
+}
+
+.result-image-frame {
+  background: #101010;
+  border: 1px solid #4d4d4d;
+  overflow: hidden;
+  aspect-ratio: 1.9 / 0.62;
+}
+
+.result-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 1100px) {
+  .viewer-grid,
+  .info-grid,
+  .result-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .left-rail {
+    display: none;
+  }
+
+  .welcome-card h1 {
+    font-size: 24px;
+  }
+}
