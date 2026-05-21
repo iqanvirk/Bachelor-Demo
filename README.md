@@ -44,9 +44,14 @@ npm run dev
 ```
 
 ### Terminal 2
+```
+cd Backend-Demo
+cd segmentation_OCT
+```
+
 
 ```
-unicorn api:app --reload
+uvicorn api:app --reload
 ```
 
 # React + TypeScript + Vite
