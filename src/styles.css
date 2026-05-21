@@ -38,7 +38,7 @@ img {
 .windows-bottombar {
   width: 100%;
   height: 50px;
-  object-fit: fill;
+  object-fit: contain;
   flex-shrink: 0;
   display: block;
 }
@@ -238,7 +238,7 @@ img {
 .fundus-frame img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .oct-scale {
@@ -267,7 +267,7 @@ img {
 .oct-frame img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .no-data {
@@ -457,7 +457,7 @@ img {
 .lib-thumb source {
   width: 100%;
   aspect-ratio: 3/1;
-  object-fit: cover;
+  object-fit: contain;
   display: block;
   border-radius: 5px;
 }
@@ -511,7 +511,7 @@ img {
 .result-image-frame img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .run-bar {
@@ -541,4 +541,30 @@ img {
   align-items: center;
   justify-content: center;
   padding: 3px 6px;
+}
+
+.prediction-status {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid #000;
+  margin-bottom: 6px;
+  letter-spacing: 0.2px;
+}
+
+.prediction-status.healthy {
+  background: #40860a;
+  color: #fff;
+}
+
+.prediction-status.unhealthy {
+  background: #a12b2b;
+  color: #fff;
+}
+
+.prediction-status.uncertain {
+  background: #0073af;
+  color: #fff;
 }

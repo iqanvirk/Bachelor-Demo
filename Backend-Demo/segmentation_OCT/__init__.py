@@ -1,0 +1,1 @@
+from .use_model import analyze_image

@@ -9,6 +9,9 @@ export type ScanCase = {
   predictionImage: string | null
   findings: string[] | null
   confidence: number | null
+  finalPrediction?: string | null
+  imagePrediction?: string | null
+  thicknessPrediction?: string | null
 }
 
 export const mockScans: ScanCase[] = [

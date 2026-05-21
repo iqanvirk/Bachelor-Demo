@@ -5,19 +5,78 @@ import ImageLibrarySidebar from './components/ImageLibrarySidebar'
 
 type Screen = 'welcome' | 'image' | 'info' | 'AI-analyse'
 
-async function runModel(imageSrc: string): Promise<{ predictionImage: string; findings: string[] }> {
-  await new Promise((r) => setTimeout(r, 1000))
+async function runModel(imageSrc: string): Promise<{
+  predictionImage: string | null
+  findings: string[]
+  confidence: number | null
+  finalPrediction: string | null
+  imagePrediction: string | null
+  thicknessPrediction: string | null
+}> {
+  const imageResponse = await fetch(imageSrc)
+  const imageBlob = await imageResponse.blob()
+  const formData = new FormData()
+  formData.append('file', imageBlob, 'oct-image.png')
+
+  const response = await fetch('http://127.0.0.1:8000/analyze', {
+    method: 'POST',
+    body: formData,
+  })
+
+  if (!response.ok) {
+    throw new Error('Analysis failed')
+  }
+
+  const data = await response.json()
+
   return {
-    predictionImage: imageSrc,
+    predictionImage: data.overlay_base64
+      ? `data:image/png;base64,${data.overlay_base64}`
+      : null,
+    confidence: typeof data.confidence === 'number' ? data.confidence : null,
+    finalPrediction: data.final_prediction ?? null,
+    imagePrediction: data.image_prediction ?? null,
+    thicknessPrediction: data.thickness_prediction ?? null,
     findings: [
-      'Gjennomsnittlig retinal tykkelse: —',
-      'Sentral makulatykkelse (CMT): —',
-      'Intraretinal væske: Estimert volum —',
-      'Retinal lagstruktur: Analysert av modell',
-      'AI-vurdering: Se prediksjonsmaske',
-      'Modellkonfidens: —',
+      `CNN-modell prediksjon: ${data.image_prediction ?? '—'}`,
+      `Tykkelsesmodell prediksjon: ${data.thickness_prediction ?? '—'}`,
+      `Endelig prediksjon: ${data.final_prediction ?? '—'}`,
+      `Konfidens: ${typeof data.confidence === 'number' ? `${(data.confidence * 100).toFixed(1)}%` : '—'}`,
+      `Patologisk score: ${typeof data.pathology_score === 'number' ? data.pathology_score.toFixed(2) : '—'}`,
+      `Gjennomsnittlig retinal tykkelse: ${
+        typeof data.total_retinal_metrics?.mean_total_retinal_thickness_px === 'number'
+          ? `${data.total_retinal_metrics.mean_total_retinal_thickness_px.toFixed(1)} px`
+          : '—'
+      }`,
     ],
   }
+}
+
+function getPredictionStatus(scan: ScanCase) {
+  const prediction = scan.finalPrediction?.toLowerCase()
+
+  if (prediction === 'healthy') {
+    return {
+      label: 'Prediction: Healthy',
+      className: 'prediction-status healthy',
+    }
+  }
+
+  if (prediction === 'unhealthy') {
+    return {
+      label: 'Prediction: Unhealthy',
+      className: 'prediction-status unhealthy',
+    }
+  }
+
+  if (prediction === 'uncertain') {
+    return {
+      label: 'Prediction: Uncertain',
+      className: 'prediction-status uncertain',
+    }
+  }
+
+  return null
 }
 
 const IconBarChart = () => (
@@ -66,6 +125,10 @@ export default function App() {
           predictionImage: result.predictionImage,
           resultImage: result.predictionImage,
           findings: result.findings,
+          confidence: result.confidence,
+          finalPrediction: result.finalPrediction,
+          imagePrediction: result.imagePrediction,
+          thicknessPrediction: result.thicknessPrediction,
         }
       })
     )
@@ -204,16 +267,27 @@ export default function App() {
 
                 {(screen === 'image' || screen === 'AI-analyse') && (
                   <div className="result-grid">
-                    {scans.map((scan) => (
-                      <div key={scan.id} className="result-card">
-                        <h3>{scan.date} – {scan.time}</h3>
-                        <div className="result-image-frame">
-                          {scan.predictionImage
-                            ? <img src={scan.predictionImage} alt={`Resultat ${scan.date}`} />
-                            : <span className="no-data">No data available yet.</span>}
+                    {scans.map((scan) => {
+                      const status = getPredictionStatus(scan)
+
+                      return (
+                        <div key={scan.id} className="result-card">
+                          <h3>{scan.date} – {scan.time}</h3>
+
+                          {status && (
+                            <div className={status.className}>
+                              {status.label}
+                            </div>
+                          )}
+
+                          <div className="result-image-frame">
+                            {scan.predictionImage
+                              ? <img src={scan.predictionImage} alt={`Resultat ${scan.date}`} />
+                              : <span className="no-data">No data available yet.</span>}
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      )
+                    })}
                   </div>
                 )}
               </div>

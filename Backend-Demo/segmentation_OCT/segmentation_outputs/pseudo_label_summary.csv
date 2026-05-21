@@ -1,0 +1,11 @@
+metric,value
+low_pct,20
+high_pct,80
+original_count,220
+kept_count,88
+kept_percent,40.0
+discarded_count,132
+low_threshold,47.96307049827873
+high_threshold,59.20214923118696
+label_0_count,44
+label_1_count,44

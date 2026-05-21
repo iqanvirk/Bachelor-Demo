@@ -1,0 +1,25 @@
+GradCAM summary
+Model path: c:\Users\krieg\Documents\Trashbin newest\TrashBin\Segmentation OCT\stratified_5fold\latest_best\best_resnet18_classifier_fold_1.pth
+Images path: c:\Users\krieg\Documents\Trashbin newest\TrashBin\Segmentation OCT\images_clean.npy
+Labels path: c:\Users\krieg\Documents\Trashbin newest\TrashBin\Segmentation OCT\binary_labels.npy
+Target layer: model.layer4[-1].conv2
+Target mode: pred
+Use val split: False
+Per class: 6
+Total selected: 12
+Selected indices: [37, 81, 10, 0, 8, 52, 2, 46, 3, 28, 30, 74]
+
+idx=37 | true=0 | pred=0 | correct=1 | target_class=0 | p0=0.9992 | p1=0.0008 | conf=0.9992 | file=gradcam_idx37_true0_pred0_class0.png
+idx=81 | true=0 | pred=0 | correct=1 | target_class=0 | p0=0.9992 | p1=0.0008 | conf=0.9992 | file=gradcam_idx81_true0_pred0_class0.png
+idx=10 | true=0 | pred=0 | correct=1 | target_class=0 | p0=0.9986 | p1=0.0014 | conf=0.9986 | file=gradcam_idx10_true0_pred0_class0.png
+idx=0 | true=0 | pred=0 | correct=1 | target_class=0 | p0=0.8717 | p1=0.1283 | conf=0.8717 | file=gradcam_idx0_true0_pred0_class0.png
+idx=8 | true=0 | pred=0 | correct=1 | target_class=0 | p0=0.8716 | p1=0.1284 | conf=0.8716 | file=gradcam_idx8_true0_pred0_class0.png
+idx=52 | true=0 | pred=0 | correct=1 | target_class=0 | p0=0.8716 | p1=0.1284 | conf=0.8716 | file=gradcam_idx52_true0_pred0_class0.png
+idx=2 | true=1 | pred=1 | correct=1 | target_class=1 | p0=0.0019 | p1=0.9981 | conf=0.9981 | file=gradcam_idx2_true1_pred1_class1.png
+idx=46 | true=1 | pred=1 | correct=1 | target_class=1 | p0=0.0019 | p1=0.9981 | conf=0.9981 | file=gradcam_idx46_true1_pred1_class1.png
+idx=3 | true=1 | pred=1 | correct=1 | target_class=1 | p0=0.0038 | p1=0.9962 | conf=0.9962 | file=gradcam_idx3_true1_pred1_class1.png
+idx=28 | true=1 | pred=1 | correct=1 | target_class=1 | p0=0.0663 | p1=0.9337 | conf=0.9337 | file=gradcam_idx28_true1_pred1_class1.png
+idx=30 | true=1 | pred=1 | correct=1 | target_class=1 | p0=0.0943 | p1=0.9057 | conf=0.9057 | file=gradcam_idx30_true1_pred1_class1.png
+idx=74 | true=1 | pred=1 | correct=1 | target_class=1 | p0=0.0943 | p1=0.9057 | conf=0.9057 | file=gradcam_idx74_true1_pred1_class1.png
+
+Combined grid: c:\Users\krieg\Documents\Trashbin newest\TrashBin\Segmentation OCT\gradcam_outputs\gradcam_grid_12_examples.png
