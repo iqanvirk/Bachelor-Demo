@@ -1,3 +1,54 @@
+# How to start
+
+### 1.0 Install Dependecies
+
+Make sure to create virtual environment.
+### macOs
+```
+python3 -m venv venv
+source venv/bin/activate
+```
+
+### Windows
+
+```
+python -m venv venv
+source venv/Scripts/activate
+```
+
+### 1.1 Install Required Packages
+
+```
+pip install -r requirments.txt
+```
+
+### 1.2 Install Frontend Dependencies
+
+```
+npm install
+```
+
+### Running Application
+You have to run two terminals at the same time.
+
+### Terminal 1
+Make sure you are inside bachelor-demo folder
+
+To make sure you are in the right folder, run this prompt:
+```
+cd Bachelor-Demo
+```
+Then:
+```
+npm run dev
+```
+
+### Terminal 2
+
+```
+unicorn api:app --reload
+```
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
