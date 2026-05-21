@@ -3,6 +3,8 @@
 ### 1.0 Install Dependecies
 
 Make sure to create virtual environment.
+
+You may skip this if you already have a virtual environment ready.
 ### macOs
 ```
 python3 -m venv venv
@@ -13,7 +15,7 @@ source venv/bin/activate
 
 ```
 python -m venv venv
-source venv/Scripts/activate
+.\venv\Scripts\Activate.ps1
 ```
 
 ### 1.1 Install Required Packages
