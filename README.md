@@ -19,7 +19,7 @@ source venv/Scripts/activate
 ### 1.1 Install Required Packages
 
 ```
-pip install -r requirments.txt
+pip install -r requirements.txt
 ```
 
 ### 1.2 Install Frontend Dependencies
